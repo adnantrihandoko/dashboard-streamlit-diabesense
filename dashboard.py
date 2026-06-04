@@ -8,7 +8,65 @@ from dotenv import load_dotenv
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-st.set_page_config(page_title="DiabeSense Dashboard", layout="wide")
+st.set_page_config(page_title="DiabeSense Dashboard", layout="wide", page_icon="📊")
+
+# ==================== CUSTOM CSS ====================
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    /* Custom Styling for Metrics Cards */
+    div[data-testid="stMetric"] {
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        padding: 16px 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        border: 1px solid #F3F4F6;
+    }
+    
+    div[data-testid="stMetricValue"] {
+        color: #10B981 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+        color: #0C3A2B !important;
+        font-weight: 700 !important;
+    }
+
+    /* Sidebar Headings Override */
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+        color: #FFFFFF !important;
+    }
+    
+    /* Ensure Sidebar Text is Readable */
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] label {
+        color: #F4F8F6 !important;
+    }
+    
+    /* Button Styling */
+    div.stDownloadButton > button {
+        background-color: #10B981;
+        color: #FFFFFF;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    div.stDownloadButton > button:hover {
+        background-color: #047857;
+        color: #FFFFFF;
+        border-color: #047857;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("📊 DiabeSense - Dashboard Analisis Risiko Diabetes")
 st.caption("Terhubung ke database: Neon.tech (Cloud) Production | Data screening risiko diabetes")
 
@@ -197,7 +255,7 @@ try:
                 title='Assessment per Rentang Usia',
                 color='Jumlah',
                 text='Jumlah',
-                color_continuous_scale='Blues'
+                color_continuous_scale='Greens'
             )
             st.plotly_chart(fig_bar, use_container_width=True)
         else:
